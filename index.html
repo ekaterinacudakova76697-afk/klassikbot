@@ -24,7 +24,7 @@
             padding: 20px;
         }
 
-        /* ========== НОВАЯ ШАПКА ========== */
+        /* ========== ШАПКА (ваш цвет, смайлики, описание) ========== */
         .header {
             text-align: center;
             padding: 50px 20px;
@@ -37,7 +37,6 @@
             overflow: hidden;
         }
 
-        /* Разбросанные смайлики (оставили для атмосферы) */
         .header .emoji-1 { position: absolute; font-size: 45px; opacity: 0.2; top: 15%; left: 5%; transform: rotate(-15deg); pointer-events: none; }
         .header .emoji-2 { position: absolute; font-size: 55px; opacity: 0.2; top: 60%; right: 8%; transform: rotate(12deg); pointer-events: none; }
         .header .emoji-3 { position: absolute; font-size: 35px; opacity: 0.2; top: 70%; left: 15%; transform: rotate(-8deg); pointer-events: none; }
@@ -109,7 +108,7 @@
             z-index: 2;
         }
 
-        /* ========== ОСТАЛЬНЫЕ СТИЛИ (без изменений) ========== */
+        /* ========== СЕТКА ПИСАТЕЛЕЙ ========== */
         .writers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -158,15 +157,6 @@
             margin-top: 10px;
         }
 
-        .quiz-section {
-            background: white;
-            border-radius: 20px;
-            padding: 30px;
-            margin-top: 40px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-
         .fact-btn {
             background: #2c3e50;
             color: white;
@@ -190,7 +180,6 @@
 
 <div class="container">
     <div class="header">
-        <!-- Атмосферные смайлики -->
         <div class="emoji-1">📖</div>
         <div class="emoji-2">✍️</div>
         <div class="emoji-3">📚</div>
@@ -209,21 +198,12 @@
             <strong>✨ Нажми на любого писателя — увидишь его биографию, список книг и современные пересказы.</strong>
         </div>
 
-        <!-- Кнопка викторины — наверх, открывает новое окно -->
         <button class="quiz-top-btn" id="topQuizBtn">🎯 Пройти викторину по литературе →</button>
 
         <div class="header-decoration">✦ ✦ ✦</div>
     </div>
 
     <div class="writers-grid" id="writersGrid"></div>
-
-    <!-- Старая викторина внизу (оставлена для удобства, но теперь дублирует кнопку) -->
-    <div class="quiz-section">
-        <h2>🎯 Викторина по литературе</h2>
-        <p id="quizStatus">10 случайных вопросов (из 15)</p>
-        <button class="fact-btn" id="startQuizBtn">▶ Начать новую викторину</button>
-        <div id="quizContainer"></div>
-    </div>
 
     <div style="text-align: center;">
         <button class="fact-btn" id="randomFactBtn">✨ Случайный факт о литературе</button>
@@ -266,7 +246,7 @@
         });
     }
 
-    // ========== ВИКТОРИНА (БЕЗ ИЗМЕНЕНИЙ) ==========
+    // ========== БАНК ВОПРОСОВ ==========
     const quizBank = [
         { question: 'Кто написал роман «Война и мир»?', options: ['А.С. Пушкин', 'Ф.М. Достоевский', 'Л.Н. Толстой', 'А.П. Чехов'], correct: 'Л.Н. Толстой', explanation: '«Война и мир» — роман-эпопея Льва Толстого.' },
         { question: 'Какой писатель участвовал в 29 дуэлях?', options: ['Н.В. Гоголь', 'А.С. Пушкин', 'Ф.М. Достоевский', 'А.П. Чехов'], correct: 'А.С. Пушкин', explanation: 'Пушкин участвовал в 29 дуэлях.' },
@@ -302,57 +282,12 @@
         "🐴 «Шинель» породила фразу «все мы вышли из гоголевской шинели»."
     ];
 
-    let currentQuiz = [];
-    let quizAnswers = [];
-
-    function startQuiz() {
-        currentQuiz = [...quizBank];
-        for (let i = currentQuiz.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [currentQuiz[i], currentQuiz[j]] = [currentQuiz[j], currentQuiz[i]];
-        }
-        currentQuiz = currentQuiz.slice(0, 10);
-        quizAnswers = new Array(10).fill(null);
-        renderQuiz();
-    }
-
-    function renderQuiz() {
-        const container = document.getElementById('quizContainer');
-        if (!currentQuiz.length) {
-            container.innerHTML = '<p>Нажми «Начать новую викторину»</p>';
-            return;
-        }
-        let html = '';
-        currentQuiz.forEach((q, idx) => {
-            const userAnswer = quizAnswers[idx];
-            html += `
-                <div class="quiz-question" style="background:#faf7f0; padding:15px; margin-bottom:15px; border-radius:12px;">
-                    <strong>${idx+1}. ${q.question}</strong>
-                    <div style="display:flex; flex-wrap:wrap; gap:10px; margin-top:10px;">
-                        ${q.options.map(opt => `<span style="background:#e8e0d3; padding:8px 16px; border-radius:20px; cursor:pointer;" onclick="answerQuiz(${idx}, '${opt}')">${opt}</span>`).join('')}
-                    </div>
-                    <div style="margin-top:10px;">
-                        ${userAnswer ? (userAnswer === q.correct ? '✅ Правильно! ' + q.explanation : '❌ Неправильно. ' + q.explanation) : ''}
-                    </div>
-                </div>
-            `;
-        });
-        container.innerHTML = html;
-        const correctCount = quizAnswers.filter((a,i) => a === currentQuiz[i].correct).length;
-        document.getElementById('quizStatus').innerHTML = `✅ Правильных ответов: ${correctCount} из 10`;
-    }
-
-    function answerQuiz(idx, answer) {
-        quizAnswers[idx] = answer;
-        renderQuiz();
-    }
-
     function randomFact() {
         const fact = generalFacts[Math.floor(Math.random() * generalFacts.length)];
         document.getElementById('factDisplay').innerHTML = fact;
     }
 
-    // Открытие викторины в новом окне (вкладке)
+    // Функция открытия викторины в новом окне с кнопкой возврата
     function openQuizInNewWindow() {
         const quizHtml = `
 <!DOCTYPE html>
@@ -362,19 +297,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Викторина | «Золотая полка»</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #faf7f0; max-width: 800px; margin: 0 auto; padding: 30px 20px; }
-        .quiz-question { background: white; padding: 20px; margin-bottom: 20px; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-        .quiz-options { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 15px; }
-        .quiz-option { background: #e8e0d3; padding: 8px 20px; border-radius: 40px; cursor: pointer; transition: 0.2s; }
-        .quiz-option:hover { background: #c49a6c; color: white; }
-        .quiz-feedback { margin-top: 12px; font-size: 0.9rem; color: #555; }
-        button { background: #755a47; color: white; border: none; padding: 12px 24px; border-radius: 40px; font-size: 1rem; cursor: pointer; margin-bottom: 20px; }
-        h1 { color: #755a47; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #faf7f0;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px 20px;
+        }
+        .quiz-question {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 16px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        .quiz-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+        }
+        .quiz-option {
+            background: #e8e0d3;
+            padding: 8px 20px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        .quiz-option:hover {
+            background: #c49a6c;
+            color: white;
+        }
+        .quiz-feedback {
+            margin-top: 12px;
+            font-size: 0.9rem;
+            color: #555;
+        }
+        button {
+            background: #755a47;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 40px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-right: 15px;
+            margin-bottom: 20px;
+        }
+        button:hover {
+            background: #5c4230;
+        }
+        .back-link {
+            background: #2c3e50;
+        }
+        .back-link:hover {
+            background: #1a2a36;
+        }
+        h1 {
+            color: #755a47;
+        }
     </style>
 </head>
 <body>
     <h1>🎯 Викторина по литературе</h1>
     <button id="restartQuizBtn">🔄 Начать заново</button>
+    <button class="back-link" onclick="window.location.href='${window.location.href}'">🏠 Вернуться на главную страницу</button>
     <div id="quizContainer"></div>
     <script>
         const quizBank = ${JSON.stringify(quizBank)};
@@ -415,13 +402,13 @@
             });
             container.innerHTML = html;
             const correctCount = quizAnswers.filter((a,i) => a === currentQuiz[i].correct).length;
-            const status = document.createElement('div');
-            status.style.margin = '20px 0';
-            status.style.fontWeight = 'bold';
-            status.innerHTML = \`✅ Правильных ответов: \${correctCount} из 10\`;
+            const statusDiv = document.createElement('div');
+            statusDiv.style.margin = '20px 0';
+            statusDiv.style.fontWeight = 'bold';
+            statusDiv.innerHTML = \`✅ Правильных ответов: \${correctCount} из 10\`;
             if (!document.getElementById('quizStatus')) {
-                status.id = 'quizStatus';
-                container.prepend(status);
+                statusDiv.id = 'quizStatus';
+                container.prepend(statusDiv);
             } else {
                 document.getElementById('quizStatus').innerHTML = \`✅ Правильных ответов: \${correctCount} из 10\`;
             }
@@ -444,10 +431,8 @@
     }
 
     renderWriters();
-    document.getElementById('startQuizBtn').onclick = startQuiz;
     document.getElementById('randomFactBtn').onclick = randomFact;
     document.getElementById('topQuizBtn').onclick = openQuizInNewWindow;
-    window.answerQuiz = answerQuiz;
 </script>
 </body>
 </html>

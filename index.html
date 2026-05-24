@@ -26,60 +26,70 @@
 
         .header {
             text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(135deg, #4a3520, #2c1e12);
-            color: #fef5e7;
+            padding: 50px 20px;
+            background: linear-gradient(135deg, #e8dccc, #d4c4a8);
+            color: #3e2a1f;
             border-radius: 30px;
             margin-bottom: 40px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
             position: relative;
             overflow: hidden;
         }
 
+        /* Много прозрачных смайликов */
         .header::before {
-            content: "📖";
-            font-size: 120px;
+            content: "📖 ✍️ 📚 🎭 ✨ 🖋️ 📜 📖 ✍️ 📚 🎭 ✨ 🖋️ 📜";
+            font-size: 70px;
             opacity: 0.08;
             position: absolute;
-            bottom: -20px;
-            right: -20px;
-            transform: rotate(-10deg);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            white-space: nowrap;
             pointer-events: none;
+            letter-spacing: 20px;
         }
 
+        /* Дополнительный слой с другими смайликами */
         .header::after {
-            content: "✍️";
-            font-size: 100px;
-            opacity: 0.08;
+            content: "⭐ 📖 ✨ 🎭 📚 ⭐ 🖋️ 📜 ✨ 📖 ⭐ 🎭";
+            font-size: 50px;
+            opacity: 0.06;
             position: absolute;
-            top: -10px;
-            left: -20px;
-            transform: rotate(10deg);
+            bottom: 10px;
+            right: 0;
+            width: 100%;
             pointer-events: none;
+            letter-spacing: 15px;
+            transform: rotate(-3deg);
         }
 
         .header h1 {
-            font-size: 2.8rem;
+            font-size: 2.6rem;
             margin-bottom: 10px;
             font-weight: 600;
-            letter-spacing: -0.5px;
             position: relative;
+            z-index: 2;
         }
 
         .header p {
-            font-size: 1.2rem;
-            opacity: 0.9;
+            font-size: 1.1rem;
+            opacity: 0.85;
             max-width: 600px;
             margin: 0 auto;
             position: relative;
+            z-index: 2;
         }
 
         .header-decoration {
             display: inline-block;
             margin-top: 20px;
-            font-size: 1.4rem;
-            letter-spacing: 8px;
-            opacity: 0.6;
+            font-size: 1.3rem;
+            letter-spacing: 6px;
+            opacity: 0.5;
+            position: relative;
+            z-index: 2;
         }
 
         .writers-grid {
@@ -163,7 +173,7 @@
     <div class="header">
     <h1>📖 Золотая полка</h1>
     <p>Проект по истории: Русская литература XIX — начала XX века</p>
-    <p>👆 Нажми на писателя — откроется страница с биографией и книгами</p>
+    <p>Нажми на писателя — откроется страница с биографией и книгами</p>
     <div class="header-decoration">✦ ✦ ✦</div>
 </div>
 

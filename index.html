@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>КлассикBot | Русская литература</title>
+    <title>«Золотая полка» | Русская литература XIX–XX века</title>
     <style>
         * {
             margin: 0;
@@ -24,126 +24,92 @@
             padding: 20px;
         }
 
+        /* ========== НОВАЯ ШАПКА ========== */
         .header {
             text-align: center;
             padding: 50px 20px;
             background: linear-gradient(135deg, #8c6e55, #755a47);
-            color: #2c1e12;
+            color: #fef5e7;
             border-radius: 30px;
             margin-bottom: 40px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
             position: relative;
             overflow: hidden;
         }
 
-        /* Разбросанные смайлики */
-        .header .emoji-1 {
-            position: absolute;
-            font-size: 45px;
-            opacity: 0.2;
-            top: 15%;
-            left: 5%;
-            transform: rotate(-15deg);
-            pointer-events: none;
-        }
-
-        .header .emoji-2 {
-            position: absolute;
-            font-size: 55px;
-            opacity: 0.2;
-            top: 60%;
-            right: 8%;
-            transform: rotate(12deg);
-            pointer-events: none;
-        }
-
-        .header .emoji-3 {
-            position: absolute;
-            font-size: 35px;
-            opacity: 0.2;
-            top: 70%;
-            left: 15%;
-            transform: rotate(-8deg);
-            pointer-events: none;
-        }
-
-        .header .emoji-4 {
-            position: absolute;
-            font-size: 50px;
-            opacity: 0.18;
-            top: 25%;
-            right: 20%;
-            transform: rotate(25deg);
-            pointer-events: none;
-        }
-
-        .header .emoji-5 {
-            position: absolute;
-            font-size: 40px;
-            opacity: 0.2;
-            bottom: 10%;
-            right: 30%;
-            transform: rotate(-20deg);
-            pointer-events: none;
-        }
-
-        .header .emoji-6 {
-            position: absolute;
-            font-size: 60px;
-            opacity: 0.15;
-            top: 40%;
-            left: 80%;
-            transform: rotate(5deg);
-            pointer-events: none;
-        }
-
-        .header .emoji-7 {
-            position: absolute;
-            font-size: 30px;
-            opacity: 0.22;
-            bottom: 20%;
-            left: 70%;
-            transform: rotate(-30deg);
-            pointer-events: none;
-        }
-
-        .header .emoji-8 {
-            position: absolute;
-            font-size: 48px;
-            opacity: 0.17;
-            top: 80%;
-            left: 85%;
-            transform: rotate(15deg);
-            pointer-events: none;
-        }
+        /* Разбросанные смайлики (оставили для атмосферы) */
+        .header .emoji-1 { position: absolute; font-size: 45px; opacity: 0.2; top: 15%; left: 5%; transform: rotate(-15deg); pointer-events: none; }
+        .header .emoji-2 { position: absolute; font-size: 55px; opacity: 0.2; top: 60%; right: 8%; transform: rotate(12deg); pointer-events: none; }
+        .header .emoji-3 { position: absolute; font-size: 35px; opacity: 0.2; top: 70%; left: 15%; transform: rotate(-8deg); pointer-events: none; }
+        .header .emoji-4 { position: absolute; font-size: 50px; opacity: 0.18; top: 25%; right: 20%; transform: rotate(25deg); pointer-events: none; }
+        .header .emoji-5 { position: absolute; font-size: 40px; opacity: 0.2; bottom: 10%; right: 30%; transform: rotate(-20deg); pointer-events: none; }
+        .header .emoji-6 { position: absolute; font-size: 60px; opacity: 0.15; top: 40%; left: 80%; transform: rotate(5deg); pointer-events: none; }
+        .header .emoji-7 { position: absolute; font-size: 30px; opacity: 0.22; bottom: 20%; left: 70%; transform: rotate(-30deg); pointer-events: none; }
+        .header .emoji-8 { position: absolute; font-size: 48px; opacity: 0.17; top: 80%; left: 85%; transform: rotate(15deg); pointer-events: none; }
 
         .header h1 {
-            font-size: 2.6rem;
+            font-size: 2.8rem;
             margin-bottom: 10px;
             font-weight: 600;
             position: relative;
             z-index: 2;
         }
 
-        .header p {
-            font-size: 1.1rem;
-            opacity: 0.85;
-            max-width: 600px;
-            margin: 0 auto;
+        .header .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 15px;
             position: relative;
             z-index: 2;
+        }
+
+        .header .description {
+            max-width: 700px;
+            margin: 0 auto 20px;
+            background: rgba(0,0,0,0.2);
+            padding: 15px 20px;
+            border-radius: 60px;
+            font-size: 1rem;
+            position: relative;
+            z-index: 2;
+            backdrop-filter: blur(2px);
+        }
+
+        .quiz-top-btn {
+            display: inline-block;
+            background: #fef5e7;
+            color: #755a47;
+            border: none;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+            transition: all 0.2s ease;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            text-decoration: none;
+            position: relative;
+            z-index: 3;
+        }
+
+        .quiz-top-btn:hover {
+            background: #ffffff;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.15);
         }
 
         .header-decoration {
             display: inline-block;
             margin-top: 20px;
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             letter-spacing: 6px;
             opacity: 0.5;
             position: relative;
             z-index: 2;
         }
 
+        /* ========== ОСТАЛЬНЫЕ СТИЛИ (без изменений) ========== */
         .writers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -198,6 +164,7 @@
             padding: 30px;
             margin-top: 40px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-align: center;
         }
 
         .fact-btn {
@@ -223,6 +190,7 @@
 
 <div class="container">
     <div class="header">
+        <!-- Атмосферные смайлики -->
         <div class="emoji-1">📖</div>
         <div class="emoji-2">✍️</div>
         <div class="emoji-3">📚</div>
@@ -231,14 +199,25 @@
         <div class="emoji-6">🖋️</div>
         <div class="emoji-7">📜</div>
         <div class="emoji-8">⭐</div>
-    <h1>📖 Золотая полка</h1>
-    <p>Проект по истории: Русская литература XIX — начала XX века</p>
-    <p>Нажми на писателя — откроется страница с биографией и книгами</p>
-    <div class="header-decoration">✦ ✦ ✦</div>
-</div>
+
+        <h1>📖 «Золотая полка»</h1>
+        <div class="subtitle">Проект по истории России: русская литература XIX — начала XX века</div>
+
+        <div class="description">
+            📜 Как история отражалась в литературе? Как писатели влияли на умы и события?<br>
+            Этот проект — путеводитель по главным авторам, их произведениям и неожиданным фактам.<br>
+            <strong>✨ Нажми на любого писателя — увидишь его биографию, список книг и современные пересказы.</strong>
+        </div>
+
+        <!-- Кнопка викторины — наверх, открывает новое окно -->
+        <button class="quiz-top-btn" id="topQuizBtn">🎯 Пройти викторину по литературе →</button>
+
+        <div class="header-decoration">✦ ✦ ✦</div>
+    </div>
 
     <div class="writers-grid" id="writersGrid"></div>
 
+    <!-- Старая викторина внизу (оставлена для удобства, но теперь дублирует кнопку) -->
     <div class="quiz-section">
         <h2>🎯 Викторина по литературе</h2>
         <p id="quizStatus">10 случайных вопросов (из 15)</p>
@@ -252,18 +231,19 @@
     </div>
 
     <footer>
-        Проект по истории | КлассикBot | 2026
+        Проект по истории | «Золотая полка» | 2026
     </footer>
 </div>
 
 <script>
+    // ========== ДАННЫЕ ПИСАТЕЛЕЙ ==========
     const writers = [
         { id: 'pushkin', name: 'Александр Сергеевич Пушкин', years: '1799-1837', works: '«Евгений Онегин», «Капитанская дочка», «Медный всадник», «Пиковая дама»', quote: '«Чем меньше женщину мы любим, тем легче нравимся мы ей»', img: 'pushkin.jpg' },
         { id: 'gogol', name: 'Николай Васильевич Гоголь', years: '1809-1852', works: '«Мёртвые души», «Ревизор», «Вий», «Тарас Бульба», «Шинель»', quote: '«Какие необъятные, оригинальные физиономии!»', img: 'gogol.jpg' },
         { id: 'dostoevsky', name: 'Фёдор Михайлович Достоевский', years: '1821-1881', works: '«Преступление и наказание», «Идиот», «Братья Карамазовы», «Бесы»', quote: '«Красота спасёт мир»', img: 'dostoevsky.jpg' },
         { id: 'chekhov', name: 'Антон Павлович Чехов', years: '1860-1904', works: '«Вишнёвый сад», «Чайка», «Дама с собачкой», «Палата №6»', quote: '«Если человек здоров, значит, он просто плохо обследован»', img: 'chekhov.jpg' },
         { id: 'tolstoy', name: 'Лев Николаевич Толстой', years: '1828-1910', works: '«Война и мир», «Анна Каренина», «Воскресение», «Севастопольские рассказы»', quote: '«Все хотят изменить человечество, никто не думает о том, как изменить себя»', img: 'tolstoy.jpg' },
-        { id: 'zamyatin', name: 'Евгений Иванович Замятин', years: '1884-1937', works: '«Мы», «Наводнение», «Пещера», «Уездное»', quote: '«Человек — как роман: до самой последней страницы не знаешь, чем кончится. Иначе не стоило бы и читать…»', img: 'zamyatin.jpg'}
+        { id: 'zamyatin', name: 'Евгений Иванович Замятин', years: '1884-1937', works: '«Мы», «Наводнение», «Пещера», «Уездное»', quote: '«Человек — как роман: до самой последней страницы не знаешь, чем кончится. Иначе не стоило бы и читать…»', img: 'zamyatin.jpg' }
     ];
 
     function renderWriters() {
@@ -286,7 +266,7 @@
         });
     }
 
-    // ========== ВИКТОРИНА ==========
+    // ========== ВИКТОРИНА (БЕЗ ИЗМЕНЕНИЙ) ==========
     const quizBank = [
         { question: 'Кто написал роман «Война и мир»?', options: ['А.С. Пушкин', 'Ф.М. Достоевский', 'Л.Н. Толстой', 'А.П. Чехов'], correct: 'Л.Н. Толстой', explanation: '«Война и мир» — роман-эпопея Льва Толстого.' },
         { question: 'Какой писатель участвовал в 29 дуэлях?', options: ['Н.В. Гоголь', 'А.С. Пушкин', 'Ф.М. Достоевский', 'А.П. Чехов'], correct: 'А.С. Пушкин', explanation: 'Пушкин участвовал в 29 дуэлях.' },
@@ -372,9 +352,101 @@
         document.getElementById('factDisplay').innerHTML = fact;
     }
 
+    // Открытие викторины в новом окне (вкладке)
+    function openQuizInNewWindow() {
+        const quizHtml = `
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Викторина | «Золотая полка»</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #faf7f0; max-width: 800px; margin: 0 auto; padding: 30px 20px; }
+        .quiz-question { background: white; padding: 20px; margin-bottom: 20px; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .quiz-options { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 15px; }
+        .quiz-option { background: #e8e0d3; padding: 8px 20px; border-radius: 40px; cursor: pointer; transition: 0.2s; }
+        .quiz-option:hover { background: #c49a6c; color: white; }
+        .quiz-feedback { margin-top: 12px; font-size: 0.9rem; color: #555; }
+        button { background: #755a47; color: white; border: none; padding: 12px 24px; border-radius: 40px; font-size: 1rem; cursor: pointer; margin-bottom: 20px; }
+        h1 { color: #755a47; }
+    </style>
+</head>
+<body>
+    <h1>🎯 Викторина по литературе</h1>
+    <button id="restartQuizBtn">🔄 Начать заново</button>
+    <div id="quizContainer"></div>
+    <script>
+        const quizBank = ${JSON.stringify(quizBank)};
+        let currentQuiz = [];
+        let quizAnswers = [];
+
+        function startQuiz() {
+            currentQuiz = [...quizBank];
+            for (let i = currentQuiz.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [currentQuiz[i], currentQuiz[j]] = [currentQuiz[j], currentQuiz[i]];
+            }
+            currentQuiz = currentQuiz.slice(0, 10);
+            quizAnswers = new Array(10).fill(null);
+            renderQuiz();
+        }
+
+        function renderQuiz() {
+            const container = document.getElementById('quizContainer');
+            if (!currentQuiz.length) {
+                container.innerHTML = '<p>Загрузка...</p>';
+                return;
+            }
+            let html = '';
+            currentQuiz.forEach((q, idx) => {
+                const userAnswer = quizAnswers[idx];
+                html += \`
+                    <div class="quiz-question">
+                        <strong>\${idx+1}. \${q.question}</strong>
+                        <div class="quiz-options">
+                            \${q.options.map(opt => \`<span class="quiz-option" onclick="answerQuiz(\${idx}, '\${opt}')">\${opt}</span>\`).join('')}
+                        </div>
+                        <div class="quiz-feedback">
+                            \${userAnswer ? (userAnswer === q.correct ? '✅ Правильно! ' + q.explanation : '❌ Неправильно. ' + q.explanation) : ''}
+                        </div>
+                    </div>
+                \`;
+            });
+            container.innerHTML = html;
+            const correctCount = quizAnswers.filter((a,i) => a === currentQuiz[i].correct).length;
+            const status = document.createElement('div');
+            status.style.margin = '20px 0';
+            status.style.fontWeight = 'bold';
+            status.innerHTML = \`✅ Правильных ответов: \${correctCount} из 10\`;
+            if (!document.getElementById('quizStatus')) {
+                status.id = 'quizStatus';
+                container.prepend(status);
+            } else {
+                document.getElementById('quizStatus').innerHTML = \`✅ Правильных ответов: \${correctCount} из 10\`;
+            }
+        }
+
+        function answerQuiz(idx, answer) {
+            quizAnswers[idx] = answer;
+            renderQuiz();
+        }
+
+        document.getElementById('restartQuizBtn').onclick = startQuiz;
+        startQuiz();
+    <\/script>
+</body>
+</html>
+        `;
+        const win = window.open();
+        win.document.write(quizHtml);
+        win.document.close();
+    }
+
     renderWriters();
     document.getElementById('startQuizBtn').onclick = startQuiz;
     document.getElementById('randomFactBtn').onclick = randomFact;
+    document.getElementById('topQuizBtn').onclick = openQuizInNewWindow;
     window.answerQuiz = answerQuiz;
 </script>
 </body>

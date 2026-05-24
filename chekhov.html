@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>А.П. Чехов | КлассикBot</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #faf7f0; color: #2c2b28; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        .back-link { display: inline-block; margin: 20px 0; color: #7a5c3a; text-decoration: none; font-weight: bold; }
+        .author-header { text-align: center; margin-bottom: 30px; }
+        .author-img { width: 200px; height: 200px; object-fit: cover; border-radius: 50%; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .bio { background: white; padding: 25px; border-radius: 20px; margin-bottom: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .book-card { background: white; padding: 20px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .full-summary-btn { background: #7a5c3a; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+        .full-summary { margin-top: 15px; padding: 15px; background: #f5f0e8; border-left: 4px solid #c49a6c; border-radius: 8px; display: none; white-space: pre-line; }
+        footer { text-align: center; margin-top: 40px; padding: 20px; color: #888; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← На главную</a>
+    <div class="author-header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Chekhov_1898_by_Osip_Braz.jpg/400px-Chekhov_1898_by_Osip_Braz.jpg" alt="Чехов" class="author-img">
+        <h1>Антон Павлович Чехов</h1>
+        <p>📅 1860 — 1904</p>
+    </div>
+    <div class="bio">
+        <h2>📖 Биография</h2>
+        <p>Антон Павлович Чехов — русский писатель, драматург, врач по профессии. Родился в Таганроге. Писал рассказы, повести, пьесы. Лечил крестьян бесплатно, организовывал помощь голодающим.</p>
+        <p>📝 <strong>Цитата:</strong> «Если человек здоров, значит, он просто плохо обследован».</p>
+    </div>
+    <h2>📚 Произведения</h2>
+    <div class="book-card">
+        <h3>Вишнёвый сад</h3>
+        <p>📅 Год: 1904 | 📚 Жанр: Комедия</p>
+        <p>📝 <strong>Кратко:</strong> Поместье с вишнёвым садом продаётся за долги.</p>
+    </div>
+    <div class="book-card">
+        <h3>Чайка</h3>
+        <p>📅 Год: 1896 | 📚 Жанр: Комедия</p>
+        <p>📝 <strong>Кратко:</strong> Пьеса о любви, искусстве и несбывшихся надеждах.</p>
+    </div>
+    <div class="book-card">
+        <h3>Дама с собачкой</h3>
+        <p>📅 Год: 1899 | 📚 Жанр: Рассказ</p>
+        <p>📝 <strong>Кратко:</strong> Курортный роман перерастает в настоящую любовь.</p>
+    </div>
+    <div class="book-card">
+        <h3>Палата №6</h3>
+        <p>📅 Год: 1892 | 📚 Жанр: Повесть</p>
+        <p>📝 <strong>Кратко:</strong> Врач понимает, что сам сходит с ума от несправедливости.</p>
+    </div>
+    <footer>Проект по истории | КлассикBot | 2026</footer>
+</div>
+<script>
+    function toggleFullSummary(id) {
+        const el = document.getElementById(id);
+        if (el.style.display === 'none' || !el.style.display) el.style.display = 'block';
+        else el.style.display = 'none';
+    }
+</script>
+</body>
+</html>

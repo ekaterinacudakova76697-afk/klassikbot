@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Л.Н. Толстой | КлассикBot</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #faf7f0; color: #2c2b28; line-height: 1.6; }
+        .container { max-width: 900px; margin: 0 auto; padding: 20px; }
+        .back-link { display: inline-block; margin: 20px 0; color: #7a5c3a; text-decoration: none; font-weight: bold; }
+        .author-header { text-align: center; margin-bottom: 30px; }
+        .author-img { width: 200px; height: 200px; object-fit: cover; border-radius: 50%; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.2); }
+        .bio { background: white; padding: 25px; border-radius: 20px; margin-bottom: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .book-card { background: white; padding: 20px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .full-summary-btn { background: #7a5c3a; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; margin-top: 10px; }
+        .full-summary { margin-top: 15px; padding: 15px; background: #f5f0e8; border-left: 4px solid #c49a6c; border-radius: 8px; display: none; white-space: pre-line; }
+        footer { text-align: center; margin-top: 40px; padding: 20px; color: #888; }
+    </style>
+</head>
+<body>
+<div class="container">
+    <a href="index.html" class="back-link">← На главную</a>
+    <div class="author-header">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/L.N.Tolstoy_Prokudin-Gorsky.jpg/400px-L.N.Tolstoy_Prokudin-Gorsky.jpg" alt="Толстой" class="author-img">
+        <h1>Лев Николаевич Толстой</h1>
+        <p>📅 1828 — 1910</p>
+    </div>
+    <div class="bio">
+        <h2>📖 Биография</h2>
+        <p>Лев Николаевич Толстой — великий русский писатель, мыслитель, педагог. Родился в усадьбе Ясная Поляна. Участвовал в обороне Севастополя. В 82 года ушёл из дома, чтобы жить как простой крестьянин.</p>
+        <p>📝 <strong>Цитата:</strong> «Все хотят изменить человечество, никто не думает о том, как изменить себя».</p>
+    </div>
+    <h2>📚 Произведения</h2>
+    <div class="book-card">
+        <h3>Война и мир</h3>
+        <p>📅 Год: 1869 | 📚 Жанр: Роман-эпопея</p>
+        <p>📝 <strong>Кратко:</strong> Жизнь русского общества на фоне наполеоновских войн.</p>
+    </div>
+    <div class="book-card">
+        <h3>Анна Каренина</h3>
+        <p>📅 Год: 1878 | 📚 Жанр: Роман</p>
+        <p>📝 <strong>Кратко:</strong> Женщина бросила мужа и сына ради любви и погибла под поездом.</p>
+    </div>
+    <div class="book-card">
+        <h3>Воскресение</h3>
+        <p>📅 Год: 1899 | 📚 Жанр: Роман</p>
+        <p>📝 <strong>Кратко:</strong> Князь пытается искупить вину перед соблазнённой им девушкой.</p>
+    </div>
+    <div class="book-card">
+        <h3>Севастопольские рассказы</h3>
+        <p>📅 Год: 1855 | 📚 Жанр: Сборник</p>
+        <p>📝 <strong>Кратко:</strong> Правда о войне без прикрас. Героизм, грязь и боль защитников Севастополя.</p>
+    </div>
+    <footer>Проект по истории | КлассикBot | 2026</footer>
+</div>
+<script>
+    function toggleFullSummary(id) {
+        const el = document.getElementById(id);
+        if (el.style.display === 'none' || !el.style.display) el.style.display = 'block';
+        else el.style.display = 'none';
+    }
+</script>
+</body>
+</html>

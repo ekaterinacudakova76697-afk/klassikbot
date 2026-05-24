@@ -24,7 +24,7 @@
             padding: 20px;
         }
 
-        /* ========== ШАПКА (ваш цвет, смайлики, описание) ========== */
+        /* ========== ШАПКА ========== */
         .header {
             text-align: center;
             padding: 50px 20px;
@@ -74,8 +74,21 @@
             backdrop-filter: blur(2px);
         }
 
-        .quiz-top-btn {
-            display: inline-block;
+        /* Группа кнопок в шапке */
+        .header-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .header-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             background: #fef5e7;
             color: #755a47;
             border: none;
@@ -84,15 +97,12 @@
             font-size: 1.1rem;
             font-weight: bold;
             cursor: pointer;
-            margin-top: 15px;
             transition: all 0.2s ease;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             text-decoration: none;
-            position: relative;
-            z-index: 3;
         }
 
-        .quiz-top-btn:hover {
+        .header-btn:hover {
             background: #ffffff;
             transform: translateY(-2px);
             box-shadow: 0 6px 14px rgba(0,0,0,0.15);
@@ -157,15 +167,15 @@
             margin-top: 10px;
         }
 
-        .fact-btn {
-            background: #2c3e50;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 30px;
-            font-size: 1rem;
-            cursor: pointer;
-            margin: 20px 0;
+        .fact-display {
+            text-align: center;
+            margin: 20px auto 0;
+            max-width: 600px;
+            font-style: italic;
+            background: rgba(0,0,0,0.05);
+            padding: 12px;
+            border-radius: 60px;
+            transition: all 0.3s ease;
         }
 
         footer {
@@ -198,17 +208,17 @@
             <strong>✨ Нажми на любого писателя — увидишь его биографию, список книг и современные пересказы.</strong>
         </div>
 
-        <button class="quiz-top-btn" id="topQuizBtn">🎯 Пройти викторину по литературе →</button>
+        <div class="header-buttons">
+            <button class="header-btn" id="topQuizBtn">🎯 Пройти викторину по литературе →</button>
+            <button class="header-btn" id="topFactBtn">✨ Случайный факт о литературе</button>
+        </div>
+
+        <div id="factDisplay" class="fact-display"></div>
 
         <div class="header-decoration">✦ ✦ ✦</div>
     </div>
 
     <div class="writers-grid" id="writersGrid"></div>
-
-    <div style="text-align: center;">
-        <button class="fact-btn" id="randomFactBtn">✨ Случайный факт о литературе</button>
-        <p id="factDisplay" style="margin-top: 10px; font-style: italic;"></p>
-    </div>
 
     <footer>
         Проект по истории | «Золотая полка» | 2026
@@ -282,9 +292,18 @@
         "🐴 «Шинель» породила фразу «все мы вышли из гоголевской шинели»."
     ];
 
-    function randomFact() {
+    // Случайный факт (отображается в шапке)
+    function displayRandomFact() {
         const fact = generalFacts[Math.floor(Math.random() * generalFacts.length)];
-        document.getElementById('factDisplay').innerHTML = fact;
+        const factDisplay = document.getElementById('factDisplay');
+        factDisplay.innerHTML = `✨ ${fact}`;
+        factDisplay.style.opacity = '0';
+        factDisplay.style.transform = 'translateY(-10px)';
+        setTimeout(() => {
+            factDisplay.style.transition = 'all 0.3s ease';
+            factDisplay.style.opacity = '1';
+            factDisplay.style.transform = 'translateY(0)';
+        }, 10);
     }
 
     // Функция открытия викторины в новом окне с кнопкой возврата
@@ -431,8 +450,10 @@
     }
 
     renderWriters();
-    document.getElementById('randomFactBtn').onclick = randomFact;
     document.getElementById('topQuizBtn').onclick = openQuizInNewWindow;
+    document.getElementById('topFactBtn').onclick = () => displayRandomFact();
+    // Показываем случайный факт при загрузке страницы
+    displayRandomFact();
 </script>
 </body>
 </html>

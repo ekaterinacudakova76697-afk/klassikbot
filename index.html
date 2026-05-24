@@ -27,20 +27,20 @@
         .header {
             text-align: center;
             padding: 50px 20px;
-            background: linear-gradient(135deg, #e8dccc, #d4c4a8);
-            color: #3e2a1f;
+            background: linear-gradient(135deg, #4a3520, #2c1e12);
+            color: #fef5e7;
             border-radius: 30px;
             margin-bottom: 40px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
             position: relative;
             overflow: hidden;
         }
 
-        /* Много прозрачных смайликов */
+        /* Много прозрачных смайликов — теперь их видно! */
         .header::before {
-            content: "📖 ✍️ 📚 🎭 ✨ 🖋️ 📜 📖 ✍️ 📚 🎭 ✨ 🖋️ 📜";
-            font-size: 70px;
-            opacity: 0.08;
+            content: "📖 ✍️ 📚 🎭 ✨ 🖋️ 📜 📖 ✍️ 📚 🎭 ✨ 🖋️ 📜 ✨ 📖 📚 ✍️";
+            font-size: 80px;
+            opacity: 0.15;
             position: absolute;
             top: 0;
             left: 0;
@@ -48,21 +48,38 @@
             height: 100%;
             white-space: nowrap;
             pointer-events: none;
-            letter-spacing: 20px;
+            letter-spacing: 15px;
+            color: #fef5e7;
         }
 
-        /* Дополнительный слой с другими смайликами */
+        /* Второй слой — другие смайлики */
         .header::after {
-            content: "⭐ 📖 ✨ 🎭 📚 ⭐ 🖋️ 📜 ✨ 📖 ⭐ 🎭";
-            font-size: 50px;
-            opacity: 0.06;
+            content: "⭐ 📖 ✨ 🎭 📚 ⭐ 🖋️ 📜 ✨ 📖 ⭐ 🎭 ✨ 📖 ⭐ 📜";
+            font-size: 60px;
+            opacity: 0.12;
             position: absolute;
-            bottom: 10px;
+            bottom: 5px;
             right: 0;
             width: 100%;
             pointer-events: none;
-            letter-spacing: 15px;
-            transform: rotate(-3deg);
+            letter-spacing: 20px;
+            transform: rotate(-2deg);
+            color: #fef5e7;
+        }
+
+        /* Третий слой — ещё больше смайликов */
+        .header .extra-emojis {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 50px;
+            opacity: 0.1;
+            letter-spacing: 25px;
+            color: #fef5e7;
+            pointer-events: none;
+            white-space: nowrap;
         }
 
         .header h1 {
@@ -75,7 +92,7 @@
 
         .header p {
             font-size: 1.1rem;
-            opacity: 0.85;
+            opacity: 0.9;
             max-width: 600px;
             margin: 0 auto;
             position: relative;
@@ -87,7 +104,7 @@
             margin-top: 20px;
             font-size: 1.3rem;
             letter-spacing: 6px;
-            opacity: 0.5;
+            opacity: 0.6;
             position: relative;
             z-index: 2;
         }

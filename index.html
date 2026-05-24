@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>КлассикBot | Русская литература XIX–XX века</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #faf7f0;
+            color: #2c2b28;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Шапка */
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, #2c3e50, #1a2a36);
+            color: white;
+            border-radius: 20px;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Карточки писателей */
+        .writers-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .writer-card {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .writer-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+        }
+
+        .writer-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #d9c8b2;
+        }
+
+        .writer-info {
+            padding: 20px;
+        }
+
+        .writer-info h3 {
+            font-size: 1.5rem;
+            margin-bottom: 8px;
+            color: #1a2a36;
+        }
+
+        .writer-info p {
+            color: #555;
+            font-size: 0.9rem;
+            margin-bottom: 8px;
+        }
+
+        .writer-quote {
+            font-style: italic;
+            color: #7a5c3a;
+            font-size: 0.9rem;
+            border-left: 3px solid #c49a6c;
+            padding-left: 12px;
+            margin-top: 10px;
+        }
+
+        /* Модальное окно с книгами */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background: white;
+            max-width: 600px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border-radius: 20px;
+            padding: 25px;
+            position: relative;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: #999;
+        }
+
+        .close-modal:hover {
+            color: #333;
+        }
+
+        .book-list {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        .book-list li {
+            margin-bottom: 12px;
+        }
+
+        .book-btn {
+            width: 100%;
+            padding: 12px;
+            background: #e8e0d3;
+            border: none;
+            border-radius: 10px;
+            text-align: left;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .book-btn:hover {
+            background: #d4c8b6;
+        }
+
+        /* Карточка книги */
+        .book-card {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f5f0e8;
+            border-radius: 12px;
+        }
+
+        .full-summary-btn {
+            background: #7a5c3a;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .full-summary {
+            margin-top: 15px;
+            padding: 15px;
+            background: #fff;
+            border-left: 4px solid #c49a6c;
+            border-radius: 8px;
+            display: none;
+            white-space: pre-line;
+            line-height: 1.5;
+        }
+
+        /* Викторина */
+        .quiz-section {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-top: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .quiz-question {
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #faf7f0;
+            border-radius: 12px;
+        }
+
+        .quiz-options {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .quiz-option {
+            background: #e8e0d3;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .quiz-option:hover {
+            background: #c49a6c;
+            color: white;
+        }
+
+        .quiz-feedback {
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        .fact-btn {
+            background: #2c3e50;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin: 20px 0;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            padding: 20px;
+            color: #888;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h1>📚 «КлассикBot»</h1>
+        <p>Проект по истории: Русская литература XIX — начала XX века</p>
+        <p>👆 Нажми на писателя — выбери книгу — читай пересказ</p>
+    </div>
+
+    <div class="writers-grid" id="writersGrid"></div>
+
+    <div class="quiz-section">
+        <h2>🎯 Викторина по литературе</h2>
+        <p id="quizStatus">10 случайных вопросов (из 15)</p>
+        <button class="fact-btn" id="startQuizBtn">▶ Начать новую викторину</button>
+        <div id="quizContainer"></div>
+    </div>
+
+    <div style="text-align: center;">
+        <button class="fact-btn" id="randomFactBtn">✨ Случайный факт о литературе</button>
+        <p id="factDisplay" style="margin-top: 10px; font-style: italic;"></p>
+    </div>
+
+    <footer>
+        Проект по истории | КлассикBot | 2026
+    </footer>
+</div>
+
+<div id="booksModal" class="modal">
+    <div class="modal-content">
+        <span class="close-modal" onclick="closeBooksModal()">&times;</span>
+        <h2 id="modalAuthorName"></h2>
+        <ul class="book-list" id="booksList"></ul>
+        <div id="bookDetail"></div>
+    </div>
+</div>
+
+<script>
+    // ========== ДАННЫЕ О ПИСАТЕЛЯХ (из вашего бота) ==========
+    const writers = {
+        пушкин: {
+            name: 'Александр Сергеевич Пушкин (1799-1837)',
+            works: '«Евгений Онегин», «Капитанская дочка», «Медный всадник», «Пиковая дама»',
+            quote: '«Чем меньше женщину мы любим, тем легче нравимся мы ей»',
+            photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/5/57/Kiprensky_Pushkin.jpg/400px-Kiprensky_Pushkin.jpg'
+        },
+        гоголь: {
+            name: 'Николай Васильевич Гоголь (1809-1852)',
+            works: '«Мёртвые души», «Ревизор», «Вий», «Тарас Бульба», «Шинель»',
+            quote: '«Какие необъятные, оригинальные физиономии!»',
+            photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Nikolay_Repin-Gogol.jpg/400px-Nikolay_Repin-Gogol.jpg'
+        },
+        достоевский: {
+            name: 'Фёдор Михайлович Достоевский (1821-1881)',
+            works: '«Преступление и наказание», «Идиот», «Братья Карамазовы», «Бесы»',
+            quote: '«Красота спасёт мир»',
+            photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/7e/Dostoyevsky_1872.jpg/400px-Dostoyevsky_1872.jpg'
+        },
+        чехов: {
+            name: 'Антон Павлович Чехов (1860-1904)',
+            works: '«Вишнёвый сад», «Чайка», «Дама с собачкой», «Палата №6»',
+            quote: '«Если человек здоров, значит, он просто плохо обследован»',
+            photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/6/6d/Chekhov_1898_by_Osip_Braz.jpg/400px-Chekhov_1898_by_Osip_Braz.jpg'
+        },
+        толстой: {
+            name: 'Лев Николаевич Толстой (1828-1910)',
+            works: '«Война и мир», «Анна Каренина», «Воскресение», «Севастопольские рассказы»',
+            quote: '«Все хотят изменить человечество, никто не думает о том, как изменить себя»',
+            photo: 'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2a/L.N.Tolstoy_Prokudin-Gorsky.jpg/400px-L.N.Tolstoy_Prokudin-Gorsky.jpg'
+        }
+    };
+
+    // ========== КНИГИ И ПЕРЕСКАЗЫ ==========
+    const booksDetails = {
+        пушкин: {
+            'Евгений Онегин': {
+                year: '1833',
+                genre: 'Роман в стихах',
+                summary: 'История разочарованного дворянина Евгения Онегина и наивной Татьяны Лариной.',
+                full_summary: '📖 *«Евгений Онегин»: история о том, как всё профукать.*\n\nЭто не скучный роман из школьной программы. Это первая в России книга, где главный герой — абсолютный неудачник, хоть и в дорогих перчатках.\n\n🎭 Столичный парень Евгений — красивый, богатый, модный — смертельно устал от жизни. В деревне он совершает три ошибки: отшивает Татьяну (первая написала ему любовное письмо!), убивает друга Ленского на дуэли из-за глупого флирта, а потом поздно влюбляется в ту же Татьяну — но она уже замужем и отвечает: «Я вас люблю, но я другому отдана; я буду век ему верна».\n\n🎯 Итог: он проиграл по всем фронтам.'
+            },
+            'Капитанская дочка': {
+                year: '1836',
+                genre: 'Исторический роман',
+                summary: 'Пётр Гринёв попадает в пугачёвский бунт. Честь, любовь, верность присяге.'
+            },
+            'Медный всадник': {
+                year: '1833',
+                genre: 'Поэма',
+                summary: 'Бедный чиновник Евгений теряет невесту во время наводнения и сходит с ума.'
+            },
+            'Пиковая дама': {
+                year: '1834',
+                genre: 'Повесть',
+                summary: 'Инженер Германн хочет узнать тайну трёх выигрышных карт и сходит с ума.'
+            }
+        },
+        гоголь: {
+            'Мёртвые души': { year: '1842', genre: 'Поэма', summary: 'Аферист Чичиков скупает «мёртвые души» умерших крепостных.' },
+            'Ревизор': { year: '1836', genre: 'Комедия', summary: 'В уездном городе принимают мелкого чиновника за ревизора.' },
+            'Вий': { year: '1835', genre: 'Повесть', summary: 'Студент три ночи читает молитвы над телом ведьмы.' },
+            'Тарас Бульба': { year: '1835', genre: 'Повесть', summary: 'Казацкий полковник убивает предавшего родину сына.' },
+            'Шинель': { year: '1842', genre: 'Повесть', summary: 'Маленький человек умирает от горя из-за украденной шинели.' }
+        },
+        достоевский: {
+            'Преступление и наказание': { year: '1866', genre: 'Роман', summary: 'Студент Раскольников убивает старуху-процентщицу.' },
+            'Идиот': { year: '1869', genre: 'Роман', summary: 'Князь Мышкин — человек доброты — врывается в мир денег и страстей.' },
+            'Братья Карамазовы': { year: '1880', genre: 'Роман', summary: 'Драма отцеубийства, веры и свободы.' },
+            'Бесы': { year: '1872', genre: 'Роман-предупреждение', summary: 'О революционерах, готовых на убийства ради идеи.' }
+        },
+        чехов: {
+            'Вишнёвый сад': { year: '1904', genre: 'Комедия', summary: 'Поместье с вишнёвым садом продаётся за долги.' },
+            'Чайка': { year: '1896', genre: 'Комедия', summary: 'Пьеса о любви, искусстве и несбывшихся надеждах.' },
+            'Дама с собачкой': { year: '1899', genre: 'Рассказ', summary: 'Курортный роман перерастает в настоящую любовь.' },
+            'Палата №6': { year: '1892', genre: 'Повесть', summary: 'Врач понимает, что сам сходит с ума.' }
+        },
+        толстой: {
+            'Война и мир': { year: '1869', genre: 'Роман-эпопея', summary: 'Жизнь русского общества на фоне наполеоновских войн.' },
+            'Анна Каренина': { year: '1878', genre: 'Роман', summary: 'Женщина бросает мужа ради любви и погибает.' },
+            'Воскресение': { year: '1899', genre: 'Роман', summary: 'Князь пытается искупить вину перед соблазнённой девушкой.' },
+            'Севастопольские рассказы': { year: '1855', genre: 'Сборник', summary: 'Правда о войне без прикрас.' }
+        }
+    };
+
+    // ========== БАНК ВОПРОСОВ (из вашего бота) ==========
+    const quizBank = [
+        { question: 'Кто написал роман «Война и мир»?', options: ['А.С. Пушкин', 'Ф.М. Достоевский', 'Л.Н. Толстой', 'А.П. Чехов'], correct: 'Л.Н. Толстой', explanation: '«Война и мир» — роман-эпопея Льва Толстого.' },
+        { question: 'Какой писатель участвовал в 29 дуэлях?', options: ['Н.В. Гоголь', 'А.С. Пушкин', 'Ф.М. Достоевский', 'А.П. Чехов'], correct: 'А.С. Пушкин', explanation: 'Пушкин участвовал в 29 дуэлях, 30-я стала последней.' },
+        { question: 'Кто сжёг второй том «Мёртвых душ»?', options: ['Л.Н. Толстой', 'Ф.М. Достоевский', 'Н.В. Гоголь', 'А.П. Чехов'], correct: 'Н.В. Гоголь', explanation: 'Гоголь сжёг рукопись за 10 дней до смерти.' },
+        { question: 'Кого помиловали на эшафоте?', options: ['Пушкина', 'Гоголя', 'Толстого', 'Достоевского'], correct: 'Достоевского', explanation: 'Достоевского помиловали в последний момент.' },
+        { question: 'Кто сказал: «Краткость — сестра таланта»?', options: ['Чехов', 'Пушкин', 'Толстой', 'Гоголь'], correct: 'Чехов', explanation: 'Чехов часто повторял эту фразу.' },
+        { question: 'Кто написал «Преступление и наказание»?', options: ['Толстой', 'Достоевский', 'Пушкин', 'Гоголь'], correct: 'Достоевский', explanation: 'Роман о теории Раскольникова.' },
+        { question: 'Кто в 82 года ушёл из дома?', options: ['Гоголь', 'Чехов', 'Толстой', 'Пушкин'], correct: 'Толстой', explanation: 'Толстой ушёл из Ясной Поляны.' },
+        { question: 'Кто был врачом?', options: ['Пушкин', 'Гоголь', 'Достоевский', 'Чехов'], correct: 'Чехов', explanation: 'Чехов окончил медицинский факультет.' },
+        { question: 'Кто написал «Ревизора»?', options: ['Пушкин', 'Гоголь', 'Достоевский', 'Чехов'], correct: 'Гоголь', explanation: '«Ревизор» — комедия Гоголя.' },
+        { question: 'Кто знал 7 языков?', options: ['Чехов', 'Толстой', 'Пушкин', 'Достоевский'], correct: 'Пушкин', explanation: 'Пушкин знал 7 иностранных языков.' },
+        { question: 'Год рождения Пушкина?', options: ['1799', '1801', '1812', '1825'], correct: '1799', explanation: 'Пушкин родился в 1799 году.' },
+        { question: 'Сколько лет прожил Чехов?', options: ['41', '44', '47', '50'], correct: '44', explanation: 'Чехов прожил 44 года.' },
+        { question: 'Год смерти Достоевского?', options: ['1866', '1877', '1881', '1895'], correct: '1881', explanation: 'Достоевский умер в 1881 году.' },
+        { question: 'Кто прожил дольше всех?', options: ['Пушкин', 'Гоголь', 'Толстой', 'Чехов'], correct: 'Толстой', explanation: 'Толстой прожил 82 года.' },
+        { question: 'Век рождения Гоголя?', options: ['XVII', 'XVIII', 'XIX', 'XX'], correct: 'XIX', explanation: 'Гоголь родился в XIX веке.' }
+    ];
+
+    const generalFacts = [
+        "📖 Роман «Война и мир» Толстой переписывал 8 раз!",
+        "🎭 Чехов писал пьесы между приёмами пациентов.",
+        "✍️ Пушкин знал 7 языков.",
+        "🔥 Гоголь сжёг второй том «Мёртвых душ».",
+        "⚡ Достоевского помиловали на эшафоте.",
+        "🐶 У Чехова были таксы Хина и Бром.",
+        "💪 Толстой гнул подковы.",
+        "✉️ Достоевский написал «Игрока» за 26 дней.",
+        "🖋️ Гоголь боялся быть похороненным заживо.",
+        "🎩 Пушкин участвовал в 29 дуэлях.",
+        "🏠 Толстой ушёл из дома в 82 года.",
+        "💉 Чехов бесплатно лечил крестьян.",
+        "🌟 «Преступление и наказание» мог называться «Пьяненькие».",
+        "🐴 «Шинель» породила фразу «все мы вышли из гоголевской шинели»."
+    ];
+
+    // ========== РЕНДЕР ПИСАТЕЛЕЙ ==========
+    function renderWriters() {
+        const grid = document.getElementById('writersGrid');
+        grid.innerHTML = '';
+        for (let key in writers) {
+            const w = writers[key];
+            const card = document.createElement('div');
+            card.className = 'writer-card';
+            card.onclick = () => openBooksModal(key);
+            card.innerHTML = `
+                <img src="${w.photo}" alt="${w.name}" class="writer-img" onerror="this.src='https://via.placeholder.com/400x200?text=Портрет'">
+                <div class="writer-info">
+                    <h3>${w.name}</h3>
+                    <p>📖 ${w.works}</p>
+                    <div class="writer-quote">${w.quote}</div>
+                </div>
+            `;
+            grid.appendChild(card);
+        }
+    }
+
+    let currentAuthor = null;
+    function openBooksModal(authorKey) {
+        currentAuthor = authorKey;
+        const author = writers[authorKey];
+        document.getElementById('modalAuthorName').innerHTML = `${author.name}<br><span style="font-size:0.9rem; font-weight:normal;">📖 ${author.works}</span>`;
+        const booksList = document.getElementById('booksList');
+        booksList.innerHTML = '';
+        const books = booksDetails[authorKey];
+        for (let bookName in books) {
+            const li = document.createElement('li');
+            const btn = document.createElement('button');
+            btn.textContent = bookName;
+            btn.className = 'book-btn';
+            btn.onclick = () => showBookDetail(bookName);
+            li.appendChild(btn);
+            booksList.appendChild(li);
+        }
+        document.getElementById('bookDetail').innerHTML = '';
+        document.getElementById('booksModal').style.display = 'flex';
+    }
+
+    function showBookDetail(bookName) {
+        const book = booksDetails[currentAuthor][bookName];
+        const container = document.getElementById('bookDetail');
+        const hasFull = book.full_summary ? true : false;
+        const fullId = `full_${Date.now()}`;
+        container.innerHTML = `
+            <div class="book-card">
+                <strong>📅 Год:</strong> ${book.year}<br>
+                <strong>📚 Жанр:</strong> ${book.genre}<br>
+                <strong>📝 Кратко:</strong> ${book.summary}
+                ${hasFull ? `<br><button class="full-summary-btn" onclick="toggleFullSummary('${fullId}')">📖 Читать полный пересказ</button>
+                <div id="${fullId}" class="full-summary">${book.full_summary.replace(/\n/g, '<br>')}</div>` : ''}
+            </div>
+        `;
+    }
+
+    function toggleFullSummary(id) {
+        const el = document.getElementById(id);
+        if (el.style.display === 'none' || !el.style.display) {
+            el.style.display = 'block';
+        } else {
+            el.style.display = 'none';
+        }
+    }
+
+    function closeBooksModal() {
+        document.getElementById('booksModal').style.display = 'none';
+    }
+
+    // ========== ВИКТОРИНА ==========
+    let currentQuiz = [];
+    let quizAnswers = [];
+
+    function startQuiz() {
+        currentQuiz = [...quizBank];
+        for (let i = currentQuiz.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [currentQuiz[i], currentQuiz[j]] = [currentQuiz[j], currentQuiz[i]];
+        }
+        currentQuiz = currentQuiz.slice(0, 10);
+        quizAnswers = new Array(10).fill(null);
+        renderQuiz();
+    }
+
+    function renderQuiz() {
+        const container = document.getElementById('quizContainer');
+        if (!currentQuiz.length) {
+            container.innerHTML = '<p>Нажми «Начать новую викторину»</p>';
+            return;
+        }
+        let html = '';
+        currentQuiz.forEach((q, idx) => {
+            const userAnswer = quizAnswers[idx];
+            html += `
+                <div class="quiz-question">
+                    <strong>${idx+1}. ${q.question}</strong>
+                    <div class="quiz-options">
+                        ${q.options.map(opt => `<span class="quiz-option" onclick="answerQuiz(${idx}, '${opt}')">${opt}</span>`).join('')}
+                    </div>
+                    <div class="quiz-feedback" id="quiz-fb-${idx}">
+                        ${userAnswer ? (userAnswer === q.correct ? '✅ Правильно! ' + q.explanation : '❌ Неправильно. ' + q.explanation) : ''}
+                    </div>
+                </div>
+            `;
+        });
+        container.innerHTML = html;
+        const correctCount = quizAnswers.filter((a,i) => a === currentQuiz[i].correct).length;
+        document.getElementById('quizStatus').innerHTML = `✅ Правильных ответов: ${correctCount} из 10`;
+    }
+
+    function answerQuiz(idx, answer) {
+        quizAnswers[idx] = answer;
+        renderQuiz();
+    }
+
+    // ========== СЛУЧАЙНЫЙ ФАКТ ==========
+    function randomFact() {
+        const fact = generalFacts[Math.floor(Math.random() * generalFacts.length)];
+        document.getElementById('factDisplay').innerHTML = fact;
+    }
+
+    // Инициализация
+    renderWriters();
+    document.getElementById('startQuizBtn').onclick = startQuiz;
+    document.getElementById('randomFactBtn').onclick = randomFact;
+    window.closeBooksModal = closeBooksModal;
+    window.toggleFullSummary = toggleFullSummary;
+    window.showBookDetail = showBookDetail;
+    window.answerQuiz = answerQuiz;
+    window.openBooksModal = openBooksModal;
+</script>
+</body>
+</html>

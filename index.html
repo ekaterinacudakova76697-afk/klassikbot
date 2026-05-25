@@ -62,18 +62,27 @@
             z-index: 2;
         }
 
-        .header .description {
-            max-width: 620px;
-            margin: 0 auto 25px;
-            background: rgba(0,0,0,0.2);
-            padding: 15px 25px;
-            border-radius: 60px;
-            font-size: 1rem;
+        /* Оборачиваем блок описания, чтобы он тянулся за кнопками */
+        .description-wrapper {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 25px;
             position: relative;
             z-index: 2;
+        }
+
+        .header .description {
+            background: rgba(0,0,0,0.2);
             backdrop-filter: blur(2px);
+            padding: 12px 28px;
+            border-radius: 60px;
+            font-size: 1.1rem;
             text-align: center;
             line-height: 1.5;
+            /* Центрируем, но блок будет по ширине кнопок */
+            width: auto;
+            display: inline-block;
+            box-sizing: border-box;
         }
 
         /* Группа кнопок в шапке */
@@ -82,7 +91,6 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 20px;
-            margin-top: 10px;
             margin-bottom: 20px;
             position: relative;
             z-index: 3;
@@ -104,7 +112,7 @@
             transition: all 0.2s ease;
             box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             text-decoration: none;
-            min-width: 230px;
+            white-space: nowrap;
         }
 
         .header-btn:hover {
@@ -126,6 +134,10 @@
             backdrop-filter: blur(2px);
             position: relative;
             z-index: 2;
+            width: auto;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
         }
 
         .header-decoration {
@@ -211,10 +223,13 @@
         <h1>📖 «Золотая полка»</h1>
         <div class="subtitle">Проект по истории России: русская литература XIX — начала XX века</div>
 
-        <div class="description">
-            📜 Как история отражалась в литературе? Как писатели влияли на умы и события?<br>
-            Этот проект — путеводитель по главным авторам, их произведениям и неожиданным фактам.<br>
-            <strong>✨ Нажми на любого писателя — увидишь его биографию, список книг и современные пересказы.</strong>
+        <!-- ОПИСАНИЕ: ширина будет равна сумме кнопок + отступ между ними -->
+        <div class="description-wrapper">
+            <div class="description">
+                📜 Как история отражалась в литературе? Как писатели влияли на умы и события?<br>
+                Этот проект — путеводитель по главным авторам, их произведениям и неожиданным фактам.<br>
+                ✨ <strong>Нажми на любого писателя</strong> — увидишь его биографию, список книг и современные пересказы.
+            </div>
         </div>
 
         <div class="header-buttons">

@@ -62,7 +62,6 @@
             z-index: 2;
         }
 
-        /* Оборачиваем блок описания, чтобы он тянулся за кнопками */
         .description-wrapper {
             display: flex;
             justify-content: center;
@@ -76,16 +75,14 @@
             backdrop-filter: blur(2px);
             padding: 12px 28px;
             border-radius: 60px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             text-align: center;
             line-height: 1.5;
-            /* Центрируем, но блок будет по ширине кнопок */
             width: auto;
             display: inline-block;
             box-sizing: border-box;
         }
 
-        /* Группа кнопок в шапке */
         .header-buttons {
             display: flex;
             flex-wrap: wrap;
@@ -106,7 +103,7 @@
             border: none;
             padding: 12px 28px;
             border-radius: 40px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.2s ease;
@@ -130,11 +127,8 @@
             padding: 12px 20px;
             border-radius: 60px;
             transition: all 0.3s ease;
-            font-size: 1rem;
+            font-size: 0.95rem;
             backdrop-filter: blur(2px);
-            position: relative;
-            left: auto;
-            transform: none;
         }
 
         .header-decoration {
@@ -145,6 +139,39 @@
             opacity: 0.5;
             position: relative;
             z-index: 2;
+        }
+
+        /* ========== ИСТОРИЧЕСКАЯ ПЛАШКА ========== */
+        .history-card {
+            background: #fffef7;
+            border-radius: 24px;
+            padding: 30px 35px;
+            margin-bottom: 45px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            border-left: 8px solid #c49a6c;
+            line-height: 1.7;
+            font-size: 1rem;
+            color: #2c2b28;
+        }
+
+        .history-card h2 {
+            font-size: 1.6rem;
+            color: #755a47;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .history-card p {
+            margin-bottom: 15px;
+        }
+
+        .history-card hr {
+            margin: 20px 0;
+            border: none;
+            height: 1px;
+            background: #e0d6c8;
         }
 
         /* ========== СЕТКА ПИСАТЕЛЕЙ ========== */
@@ -207,6 +234,7 @@
 <body>
 
 <div class="container">
+    <!-- ШАПКА -->
     <div class="header">
         <div class="emoji-1">📖</div>
         <div class="emoji-2">✍️</div>
@@ -220,7 +248,6 @@
         <h1>📖 «Золотая полка»</h1>
         <div class="subtitle">Проект по истории России: русская литература XIX — начала XX века</div>
 
-        <!-- ОПИСАНИЕ: ширина будет равна сумме кнопок + отступ между ними -->
         <div class="description-wrapper">
             <div class="description">
                 📜 Как история отражалась в литературе? Как писатели влияли на умы и события?<br>
@@ -231,7 +258,7 @@
 
         <div class="header-buttons">
             <button class="header-btn" id="topQuizBtn">🎯 Пройти викторину по литературе →</button>
-            <button class="header-btn" id="topFactBtn">✨ Случайный факт о писателе</button>
+            <button class="header-btn" id="topFactBtn">✨ Случайный факт о литературе</button>
         </div>
 
         <div id="factDisplay" class="fact-display"></div>
@@ -239,6 +266,18 @@
         <div class="header-decoration">✦ ✦ ✦</div>
     </div>
 
+    <!-- ИСТОРИЧЕСКАЯ СПРАВКА -->
+    <div class="history-card">
+        <h2>📜 Исторический контекст: Россия XIX – начала XX века</h2>
+        <p>XIX век в России начался как авантюрный роман. Отгремели войны с Наполеоном, Париж взят, молодой царь Александр I гулял по Европе освободителем. Но дома, в заснеженных усадьбах и душных петербургских канцеляриях, назревал взрыв.</p>
+        <p><strong>Золотой век (1810–1830-е).</strong> Главный голос — Пушкин. Он пишет «Евгения Онегина» в эпоху, когда декабристы только что проиграли на Сенатской площади, а крепостной крестьянин формально ещё вещь. Пушкин сочетал цыганскую страсть, аристократическую честь и опасное вольнодумство. Его творили на разрыв: то царь лично читает поэмы, то отправляет в ссылку.</p>
+        <p><strong>Середина бури. Гоголь и Лермонтов: время масок (1830–1840-е).</strong> Воздух сгустился. Николай I правил железной рукой. Империя огромна, чиновничья и фальшива. Гоголь пишет «Ревизора» — комедию без положительных героев, одни взяточники и мошенники. Государство в ярости, Гоголь смеётся сквозь слёзы. Чуть позже Лермонтов создаёт «Героя нашего времени» — историю циника Печорина, умного, злого и одинокого, отражавшего поколение, задушенное реакцией после разгрома декабристов. Появились первые паровозы и телеграфы, но крестьян всё ещё продавали «с придачей щенка».</p>
+        <p><strong>Серебряный контраст. Толстой и Достоевский: пророки среди раскола (1860–1880-е).</strong> Апогей империи. Александр II отменил крепостное право (1861) — рабы стали свободными, но без земли и денег. Пошли революционеры-народники, начались покушения на царей. Россия тряслась от бомб террористов. В этот хаос врываются титаны. Толстой пишет «Войну и мир» — попытку переплавить русскую историю и рассуждать о свободе воли под разрывами снарядов Бородино. Достоевский создаёт «Преступление и наказание» по горячим следам судебных процессов над нигилистами: в грязном дворе кто-то читает Маркса, а Достоевский выдаёт: «Красота спасёт мир. Но красота — страшная сила». Время называют расцветом реализма, хотя на деле это мистический триллер.</p>
+        <p><strong>Эпилог. Серебряный век: декаданс перед катастрофой (1890–1910-е).</strong> Последние цари — Александр III и Николай II. Заводы дымят, марксисты поднимают рабочих, в портах первые автомобили, в театрах Чехов. Он не пишет эпопей. «Вишнёвый сад» — тонкая, щемящая история о том, как старые усадьбы рубят под топор дачников. Время ускорилось. Серебряный век русской поэзии (Блок, Ахматова). Прозаики — Бунин, Куприн: пишут об обречённой любви, потому что весь мир обречён. Ещё миг — и прекрасная, страшная империя, где Пушкин пил шампанское с гусарами, рухнет.</p>
+        <p><strong>Так и случилось.</strong> В 1917 году грянула революция. Литература XIX — начала XX века осталась зеркалом, в котором огромная, противоречивая Россия увидела своё лицо — растерянное, бунтующее, тоскующее по правде и вечно недовольное собой.</p>
+    </div>
+
+    <!-- СЕТКА ПИСАТЕЛЕЙ -->
     <div class="writers-grid" id="writersGrid"></div>
 
     <footer>
@@ -277,7 +316,7 @@
         });
     }
 
-    // ========== БАНК ВОПРОСОВ ==========
+    // ========== БАНК ВОПРОСОВ И ФАКТОВ ==========
     const quizBank = [
         { question: 'Кто написал роман «Война и мир»?', options: ['А.С. Пушкин', 'Ф.М. Достоевский', 'Л.Н. Толстой', 'А.П. Чехов'], correct: 'Л.Н. Толстой', explanation: '«Война и мир» — роман-эпопея Льва Толстого.' },
         { question: 'Какой писатель участвовал в 29 дуэлях?', options: ['Н.В. Гоголь', 'А.С. Пушкин', 'Ф.М. Достоевский', 'А.П. Чехов'], correct: 'А.С. Пушкин', explanation: 'Пушкин участвовал в 29 дуэлях.' },
@@ -317,7 +356,6 @@
         "📖 Достоевский ненавидел немецкий порядок и считал немцев слишком скучными. При этом его жена была немкой."
     ];
 
-    // Случайный факт (отображается в шапке)
     function displayRandomFact() {
         const fact = generalFacts[Math.floor(Math.random() * generalFacts.length)];
         const factDisplay = document.getElementById('factDisplay');
@@ -331,7 +369,6 @@
         }, 10);
     }
 
-    // Функция открытия викторины в новом окне с кнопкой возврата
     function openQuizInNewWindow() {
         const quizHtml = `
 <!DOCTYPE html>
@@ -341,65 +378,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Викторина | «Золотая полка»</title>
     <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: #faf7f0;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 30px 20px;
-        }
-        .quiz-question {
-            background: white;
-            padding: 20px;
-            margin-bottom: 20px;
-            border-radius: 16px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-        }
-        .quiz-options {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 15px;
-        }
-        .quiz-option {
-            background: #e8e0d3;
-            padding: 8px 20px;
-            border-radius: 40px;
-            cursor: pointer;
-            transition: 0.2s;
-        }
-        .quiz-option:hover {
-            background: #c49a6c;
-            color: white;
-        }
-        .quiz-feedback {
-            margin-top: 12px;
-            font-size: 0.9rem;
-            color: #555;
-        }
-        button {
-            background: #755a47;
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 40px;
-            font-size: 1rem;
-            cursor: pointer;
-            margin-right: 15px;
-            margin-bottom: 20px;
-        }
-        button:hover {
-            background: #5c4230;
-        }
-        .back-link {
-            background: #2c3e50;
-        }
-        .back-link:hover {
-            background: #1a2a36;
-        }
-        h1 {
-            color: #755a47;
-        }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #faf7f0; max-width: 800px; margin: 0 auto; padding: 30px 20px; }
+        .quiz-question { background: white; padding: 20px; margin-bottom: 20px; border-radius: 16px; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
+        .quiz-options { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 15px; }
+        .quiz-option { background: #e8e0d3; padding: 8px 20px; border-radius: 40px; cursor: pointer; transition: 0.2s; }
+        .quiz-option:hover { background: #c49a6c; color: white; }
+        .quiz-feedback { margin-top: 12px; font-size: 0.9rem; color: #555; }
+        button { background: #755a47; color: white; border: none; padding: 12px 24px; border-radius: 40px; font-size: 1rem; cursor: pointer; margin-right: 15px; margin-bottom: 20px; }
+        button:hover { background: #5c4230; }
+        .back-link { background: #2c3e50; }
+        .back-link:hover { background: #1a2a36; }
+        h1 { color: #755a47; }
     </style>
 </head>
 <body>
@@ -425,10 +414,7 @@
 
         function renderQuiz() {
             const container = document.getElementById('quizContainer');
-            if (!currentQuiz.length) {
-                container.innerHTML = '<p>Загрузка...</p>';
-                return;
-            }
+            if (!currentQuiz.length) { container.innerHTML = '<p>Загрузка...</p>'; return; }
             let html = '';
             currentQuiz.forEach((q, idx) => {
                 const userAnswer = quizAnswers[idx];
@@ -450,19 +436,10 @@
             statusDiv.style.margin = '20px 0';
             statusDiv.style.fontWeight = 'bold';
             statusDiv.innerHTML = \`✅ Правильных ответов: \${correctCount} из 10\`;
-            if (!document.getElementById('quizStatus')) {
-                statusDiv.id = 'quizStatus';
-                container.prepend(statusDiv);
-            } else {
-                document.getElementById('quizStatus').innerHTML = \`✅ Правильных ответов: \${correctCount} из 10\`;
-            }
+            if (!document.getElementById('quizStatus')) { statusDiv.id = 'quizStatus'; container.prepend(statusDiv); }
+            else { document.getElementById('quizStatus').innerHTML = \`✅ Правильных ответов: \${correctCount} из 10\`; }
         }
-
-        function answerQuiz(idx, answer) {
-            quizAnswers[idx] = answer;
-            renderQuiz();
-        }
-
+        function answerQuiz(idx, answer) { quizAnswers[idx] = answer; renderQuiz(); }
         document.getElementById('restartQuizBtn').onclick = startQuiz;
         startQuiz();
     <\/script>
@@ -477,7 +454,6 @@
     renderWriters();
     document.getElementById('topQuizBtn').onclick = openQuizInNewWindow;
     document.getElementById('topFactBtn').onclick = () => displayRandomFact();
-    // Показываем случайный факт при загрузке страницы
     displayRandomFact();
 </script>
 </body>

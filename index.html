@@ -123,7 +123,7 @@
 
         .fact-display {
             text-align: center;
-            margin: 10px auto 0;
+            margin: 20px auto 0;
             max-width: 620px;
             font-style: italic;
             background: rgba(0,0,0,0.2);
@@ -133,11 +133,8 @@
             font-size: 1rem;
             backdrop-filter: blur(2px);
             position: relative;
-            z-index: 2;
-            width: auto;
-            display: inline-block;
-            left: 50%;
-            transform: translateX(-50%);
+            left: auto;
+            transform: none;
         }
 
         .header-decoration {
@@ -234,7 +231,7 @@
 
         <div class="header-buttons">
             <button class="header-btn" id="topQuizBtn">🎯 Пройти викторину по литературе →</button>
-            <button class="header-btn" id="topFactBtn">✨ Случайный факт о литературе</button>
+            <button class="header-btn" id="topFactBtn">✨ Случайный факт о писателе</button>
         </div>
 
         <div id="factDisplay" class="fact-display"></div>

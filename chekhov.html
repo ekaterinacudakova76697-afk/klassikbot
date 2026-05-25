@@ -14,7 +14,7 @@
         .bio { background: white; padding: 25px; border-radius: 20px; margin-bottom: 30px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .book-card { background: white; padding: 20px; border-radius: 16px; margin-bottom: 20px; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
         .full-summary-btn { background: #7a5c3a; color: white; border: none; padding: 8px 16px; border-radius: 8px; cursor: pointer; margin-top: 10px; }
-        .full-summary { margin-top: 15px; padding: 15px; background: #f5f0e8; border-left: 4px solid #c49a6c; border-radius: 8px; display: none; white-space: pre-line; }
+        .full-summary { margin-top: 15px; padding: 15px; background: #f5f0e8; border-left: 4px solid #c49a6c; border-radius: 8px; display: none; white-space: pre-line; line-height: 1.5; }
         footer { text-align: center; margin-top: 40px; padding: 20px; color: #888; }
     </style>
 </head>
@@ -58,7 +58,6 @@
 
 🎯 Итог: Они не боролись. Они просто красиво умирали целый год, надеясь, что всё рассосётся само. Не рассосалось.
     </div>
-        </div>
 
     
     <div class="book-card">
@@ -90,7 +89,6 @@
 
 🎯 Итог: Нина уезжает в провинцию, Костя мёртв, Тригорин снова с Аркадиной, и никто ничего не понял. Чайка — это Нина? Или Костя? Или вообще все они чайки, которых никто не жалеет?
     </div>
-        </div>
 
     
     <div class="book-card">
@@ -122,7 +120,6 @@
 
 🎯 Итог: Рассказ обрывается на полуслове. Они сидят в номере, думают, как разорвать этот круг. И не могут. И будут ездить друг к другу до самой старости. Потому что любовь — это не когда красиво. А когда не можешь забыть собачку.
     </div>
-        </div>
 
     
     <div class="book-card">
@@ -154,15 +151,19 @@
 
 🎯 Итог: Иван Громов кричит через решётку: «Сдох! Сдох, философ чёртов!» Рагин умер там же, где умерли его пациенты, которых он бросил. Потому что быть философом в кресле легко. А лежать в собственной палате № 6 — не очень.
     </div>
-        </div>
-    <footer>Проект по истории | КлассикBot | 2026</footer>
+      
+    <footer>Проект по истории | «Золотая полка» | 2026</footer>
 </div>
 <script>
     function toggleFullSummary(id) {
         const el = document.getElementById(id);
-        if (el.style.display === 'none' || !el.style.display) el.style.display = 'block';
-        else el.style.display = 'none';
+        if (el.style.display === 'none' || !el.style.display) {
+            el.style.display = 'block';
+        } else {
+            el.style.display = 'none';
+        }
     }
+    window.toggleFullSummary = toggleFullSummary;
 </script>
 </body>
 </html>
